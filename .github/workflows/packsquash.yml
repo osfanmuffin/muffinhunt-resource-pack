@@ -1,0 +1,20 @@
+name: Optimize pack
+on: [push, pull_request]
+jobs:
+   packsquash:
+    name: Optimize pack
+    runs-on: ubuntu-latest
+    steps:
+     - name: Clone repository
+       uses: actions/checkout@v3
+       with:
+          fetch-depth: 0
+     - name: Run PackSquash
+       uses: ComunidadAylas/PackSquash-action@master
+       with:
+          path: ./
+          token: ${{ secrets.GITHUB_TOKEN }}
+          minify_json_files: true
+          validate_pack_metadata_file: true
+          allow_optifine_mod: true
+          delete_bloat_json_keys: true
